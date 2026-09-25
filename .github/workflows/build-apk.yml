@@ -14,7 +14,6 @@ jobs:
       - name: Extract Dodge Rush project
         run: |
           unzip -o DodgeRush-Android-Project-Free-APK-Build.zip -d project
-          cp -r project/. project/
           find project -maxdepth 2 -type f | head -50
 
       - name: Set up Java 17
