@@ -15,9 +15,9 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Extract Dodge Rush project
-        run: |
-          unzip -o DodgeRush-Android-Project-Free-APK-Build.zip -d project
-          find project -maxdepth 2 -type f | head -50
+  run: |
+    unzip -o DodgeRush-Enhanced-Android-Project.zip -d project
+    find project -maxdepth 3 -type f | head -80
 
       - name: Set up Java 17
         uses: actions/setup-java@v6
