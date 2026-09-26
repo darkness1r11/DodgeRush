@@ -14,9 +14,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Extract Dodge Rush project
+      - name: Find and extract Dodge Rush project
         run: |
-          unzip -o DodgeRush-Enhanced-Android-Project.zip -d project
+          echo "Files in repository:"
+          ls -lah
+
+          ZIP=$(find . -maxdepth 1 -type f -iname 'DodgeRush*.zip' | head -1)
+
+          if [ -z "$ZIP" ]; then
+            echo "ERROR: No DodgeRush ZIP file found!"
+            exit 1
+          fi
+
+          echo "Found ZIP: $ZIP"
+          mkdir -p project
+          unzip -o "$ZIP" -d project
+
+          echo "Project files:"
           find project -maxdepth 3 -type f | head -80
 
       - name: Set up Java 17
@@ -44,5 +58,5 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: DodgeRush-Enhanced-APK
+          name: DodgeRush-APK
           path: project/app/build/outputs/apk/debug/app-debug.apk
